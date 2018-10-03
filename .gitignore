@@ -1,0 +1,8 @@
+# VSCode Files
+.vscode 
+
+# JetBrains Files
+.idea
+
+# Secrets
+secrets
