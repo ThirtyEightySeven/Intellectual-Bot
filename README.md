@@ -1,7 +1,9 @@
 # Intellectual-Bot.
-Basis bot made for our Discord server.
+Basic bot made for our Discord server.
 
 # Features
+* Replies
+    * Has set replies based on `replies.py`.
 * Michael Mode
     * Responds with periods if you used one.
 * Upvotes/Downvotes
