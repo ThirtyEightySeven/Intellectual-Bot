@@ -1,5 +1,7 @@
 import discord
 import json
+import configparser
+
 from secrets.token_secret import get_token
 
 
@@ -8,6 +10,12 @@ client = discord.Client()
 data = open('replies.json')
 replies = json.load(data)
 
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+MEMES = config['CHANNELS']['memes']
+UPVOTE = config['EMOJIS']['upvote']
+DOWNVOTE = config['EMOJIS']['downvote']
 
 @client.event
 async def on_message(message):
@@ -22,10 +30,11 @@ async def on_message(message):
     elif message.channel.id == '505553720294113281':
         await react('hello', None)
     elif message.channel.id == '505550463408799774':
-            if message.author.id == '148254683704721408':
-                print('DEBUG: GREG')          
-              #  await respond(message.channel, str(message.channel))
-                await respond(message.channel, 'Greg Meme™')
+        await respond(message.channel, 'Greg Meme™')
+        if message.author.id == '148254683704721408':
+            print('DEBUG: GREG')          
+            #  await respond(message.channel, str(message.channel))
+
 
 
 @client.event
@@ -37,9 +46,9 @@ async def respond(channel, msg):
 async def on_message(message):
     if message.author == client.user:
         return
-    if message.channel.id == '505553720294113281':
-        await client.add_reaction(message, ':upvote:505555867031306260')
-        await client.add_reaction(message, ':downvote:505555876892114944')
+    if message.channel.id == MEMES:
+        await client.add_reaction(message, UPVOTE)
+        await client.add_reaction(message, DOWNVOTE)
 
 
 @client.event
