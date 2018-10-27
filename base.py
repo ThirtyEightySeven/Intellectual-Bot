@@ -10,9 +10,13 @@ client = discord.Client()
 async def on_message(message):
     if message.author == client.user:
         return
-    if message.content.startswith('!hello'):
-        msg = 'Hello {0.author.mention}'.format(message)
-        await client.send_message(message.channel, 'Hello $')
+    if message.content.startswith('Yeet'):
+        msg = 'Yeet {0.author.mention}'.format(message)
+        await respond(message.channel, msg)
+
+@client.event
+async def respond(channel, msg):
+    await client.send_message(channel, msg)
 
 
 @client.event
