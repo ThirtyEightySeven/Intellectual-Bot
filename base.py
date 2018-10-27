@@ -22,18 +22,20 @@ async def on_message(message):
     # No Self Response. :yeet:.
     if message.author == client.user:
         return
-    # Response dictionary
+    # Michael Mode
     elif message.content.lower().endswith('.') and message.content.lower()[:-1] in replies.replies:
         await respond(message.channel, replies.replies[message.content.lower()[:-1]] + '.')
+    # Reply Responses
     elif message.content.lower() in replies.replies.keys():
         await respond(message.channel, replies.replies[message.content.lower()])
+    # No u Triggers
     for trigger in replies.nou_triggers:
         if trigger in message.content.lower():
             if message.content.endswith('.'):
                 await respond(message.channel, "No u.")
             else:
                 await respond(message.channel, "No u")
-
+            break
     # Upvote/Downvote Automatically.
     if message.channel.id == MEMES and len(message.attachments) > 0:
         await client.add_reaction(message, UPVOTE)
