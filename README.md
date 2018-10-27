@@ -1,7 +1,8 @@
 # Intellectual-Bot.
+Basis bot made for our Discord server.
 
-### Features to be implemented
-- "No u" to various phrasiology
-- K
-- Respond "Greg Meme:tm:" every time Greg puts a meme in High Quality Memes
-- Automatically react to all the memes in high quality memes with up and downvote
+# Features
+* Michael Mode
+    * Responds with periods if you used one.
+* Upvotes/Downvotes
+    * Responds with upvotes/downvotes in response to media posts in a specified channel.
