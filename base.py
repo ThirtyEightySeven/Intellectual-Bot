@@ -1,14 +1,13 @@
 import discord
 import json
 import configparser
+import replies
 
 from secrets.token_secret import get_token
 
 
 TOKEN = get_token()
 client = discord.Client()
-data = open('replies.json')
-replies = json.load(data)
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -25,9 +24,12 @@ async def on_message(message):
         return
     # Response dictionary
     elif message.content.lower().endswith('.'):
-        await respond(message.channel, replies[message.content.lower()[:-1]] + '.')
-    elif message.content.lower() in replies.keys():
-        await respond(message.channel, replies[message.content.lower()])
+        await respond(message.channel, replies.replies[message.content.lower()[:-1]] + '.')
+    elif message.content.lower() in replies.replies.keys():
+        await respond(message.channel, replies.replies[message.content.lower()])
+    for trigger in replies.nou_triggers:
+        if message.content.startswith(trigger):
+            await respond(message.channel, "No u")
 
     # Upvote/Downvote Automatically.
     if message.channel.id == MEMES and len(message.attachments) > 0:
