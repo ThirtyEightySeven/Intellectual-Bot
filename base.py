@@ -7,17 +7,25 @@ TOKEN = get_token()
 client = discord.Client()
 data = open('replies.json')
 replies = json.load(data)
+
+
 @client.event
 async def on_message(message):
+    print(message.content.endswith('.'))
     if message.author == client.user:
         return
+    elif message.content.lower().endswith('.'):
+        await respond(message.channel, 'Period boi')
     elif message.content.lower() in replies.keys():
-        await respond(message.channel, replies[message.content] if not message.content.endswith('.') else replies[message.content] + '.') 
+        await respond(message.channel, replies[message.content.lower()])
+    elif message.author.id == '148254683704721408':
+        await respond(message.channel, 'Greg Meme™')
     #if message.content.startswith('Yeet'):
     #    msg = 'Yeet {0.author.mention}'.format(message)
     #    await respond(message.channel, msg)
-    if message.author == 'Greg':
-        print('Greg Meme')
+    #elif message.author.id == '148254683704721408':
+    #    await respond(message.channel, 'Greg Meme™')
+
 
 @client.event
 async def respond(channel, msg):
