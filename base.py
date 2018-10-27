@@ -23,13 +23,16 @@ async def on_message(message):
     if message.author == client.user:
         return
     # Response dictionary
-    elif message.content.lower().endswith('.'):
+    elif message.content.lower().endswith('.') and message.content.lower()[:-1] in replies.replies:
         await respond(message.channel, replies.replies[message.content.lower()[:-1]] + '.')
     elif message.content.lower() in replies.replies.keys():
         await respond(message.channel, replies.replies[message.content.lower()])
     for trigger in replies.nou_triggers:
-        if message.content.startswith(trigger):
-            await respond(message.channel, "No u")
+        if trigger in message.content.lower():
+            if message.content.endswith('.'):
+                await respond(message.channel, "No u.")
+            else:
+                await respond(message.channel, "No u")
 
     # Upvote/Downvote Automatically.
     if message.channel.id == MEMES and len(message.attachments) > 0:
