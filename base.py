@@ -17,24 +17,15 @@ MEMES = config['CHANNELS']['memes']
 UPVOTE = config['EMOJIS']['upvote']
 DOWNVOTE = config['EMOJIS']['downvote']
 
+
 @client.event
 async def on_message(message):
-    print(type(message.channel))
-
     if message.author == client.user:
         return
     elif message.content.lower().endswith('.'):
         await respond(message.channel, replies[message.content.lower()[:-1]] + '.')
     elif message.content.lower() in replies.keys():
         await respond(message.channel, replies[message.content.lower()])
-    elif message.channel.id == '505553720294113281':
-        await react('hello', None)
-    elif message.channel.id == '505550463408799774':
-        await respond(message.channel, 'Greg Meme™')
-        if message.author.id == '148254683704721408':
-            print('DEBUG: GREG')          
-            #  await respond(message.channel, str(message.channel))
-
 
 
 @client.event
@@ -46,9 +37,11 @@ async def respond(channel, msg):
 async def on_message(message):
     if message.author == client.user:
         return
-    if message.channel.id == MEMES:
+    if message.channel.id == MEMES and len(message.attachments) > 0:
         await client.add_reaction(message, UPVOTE)
         await client.add_reaction(message, DOWNVOTE)
+    if message.channel.id == MEMES and message.author.id == '148254683704721408':
+        await respond(message.channel, "Greg Meme:tm:")        
 
 
 @client.event
