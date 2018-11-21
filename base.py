@@ -1,5 +1,4 @@
 import discord
-import json
 import configparser
 import replies
 
@@ -36,6 +35,7 @@ async def on_message(message):
             else:
                 await respond(message.channel, "No u")
             break
+
     # Upvote/Downvote Automatically.
     if message.channel.id == MEMES and len(message.attachments) > 0:
         await client.add_reaction(message, UPVOTE)
@@ -56,6 +56,6 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-
+    await client.change_presence(game=discord.Game(name="on Michael's MacBook."))
 
 client.run(TOKEN)
